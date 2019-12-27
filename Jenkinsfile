@@ -18,13 +18,13 @@ pipeline {
             }
         }
         post {
-    always {
-        emailext body: 'A Test EMail',
-        recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
-        subject: 'Test',
-        to: 'stsiapanhanchar@gmail.com',
-        replyTo: 'stsiapan_hanchar@epam.com'
-       }
-    }
-  }
+          always {
+              emailext body: 'A Test EMail',
+              recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+              subject: 'Test',
+              to: 'stsiapanhanchar@gmail.com',
+              replyTo: 'stsiapan_hanchar@epam.com'
+            }
+          }
+     }
 }
