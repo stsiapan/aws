@@ -17,15 +17,13 @@ pipeline {
                 echo 'Deploying....'
             }
         }
-        stage('Email') {
-            steps {
-              emailext body: "${env.BUILD_URL} has result ${currentBuild.result}",
-              mimeType: 'text/html',
-              subject: "Status of pipeline: ${currentBuild.fullDisplayName}",
-              to: 'stsiapanhanchar@gmail.com',
-              replyTo: 'stsiapan_hanchar@epam.com'
-              recipientProviders: [[$class: 'DevelopersRecipientProvider']]              
-            }
-        }
+        post {
+    always {
+        emailext body: 'A Test EMail',
+        recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+        subject: 'Test',
+        to: 'stsiapanhanchar@gmail.com',
+        replyTo: 'stsiapan_hanchar@epam.com'
     }
+  }
 }
