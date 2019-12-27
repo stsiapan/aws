@@ -24,6 +24,7 @@ pipeline {
         subject: 'Test',
         to: 'stsiapanhanchar@gmail.com',
         replyTo: 'stsiapan_hanchar@epam.com'
+       }
     }
   }
 }
