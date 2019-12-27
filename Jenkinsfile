@@ -17,14 +17,12 @@ pipeline {
                 echo 'Deploying....'
             }
         }
-        post {
-          always {
-              emailext body: 'A Test EMail',
-              recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
-              subject: 'Test',
-              to: 'stsiapanhanchar@gmail.com',
-              replyTo: 'stsiapan_hanchar@epam.com'
-            }
-          }
      }
+    post {
+        always {
+          mail to: 'stsiapan_hanchar@epam.com',
+             subject: "Pipeline: ${currentBuild.fullDisplayName}",
+             body: "Something is good/bad with ${env.BUILD_URL}"
+        }
+    }
 }
