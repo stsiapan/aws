@@ -2,19 +2,25 @@ pipeline {
     agent any
 
     stages {
+        stage('Checkout') {
+            steps {
+                echo 'Checkout..'
+                checkout scm
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
+                git branch: "master", url: 'https://github.com/stsiapan/aws.git'
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                withCredentials([sshUserPrivateKey(credentialsId: 'to_web', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
+                    sshagent(['to_web']) {
+                         sh "scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${WORKSPACE}/index.html  ${remote_user}@${remote_host}:/tmp"
+                         sh "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${remote_user}@${remote_host} 'sudo mv /tmp/index.html /usr/share/nginx/html/index.html; sudo service nginx restart'"  
             }
         }
      }
