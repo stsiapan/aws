@@ -36,7 +36,7 @@ resource "aws_instance" "web-public" {
 ### jenkins (private instance)
 
 resource "aws_instance" "web-private" {
-    ami = "ami-09510373329630e0f"
+    ami = "ami-024e981d6bef00503"
     instance_type = "t2.micro"   
     # VPC
     subnet_id = aws_subnet.priv_sub_test.id  
