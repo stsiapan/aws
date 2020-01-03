@@ -1,5 +1,5 @@
+remote_user = 'ec2-user'
 pipeline {
-    remote_user = 'ec2-user'
     agent any
 
     stages {
