@@ -1,4 +1,4 @@
-def remote_user = 'ec2-user'
+def remote_user = "ec2-user"
 pipeline {
     agent any
 
@@ -22,9 +22,6 @@ pipeline {
                             script: 'aws --region "us-east-1" ec2 describe-instances --filters "Name=tag:Name,Values=Nginx" | jq ".Reservations[].Instances[].NetworkInterfaces[].PrivateIpAddresses[].PrivateIpAddress" | sed "s/.$//; s/^.//"',
                             returnStdout: true
                             ).trim()
-                            echo "$PV_DNS"
-                            echo "$PV_IP"
-                            echo "$remote_user"
 
                          }    
                      }
