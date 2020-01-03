@@ -26,7 +26,11 @@ resource "aws_instance" "web-public" {
       host = aws_instance.web-public.public_ip
       user = "ec2-user"
       private_key = file("key_pair.pem")
-    }    
+    }
+    
+    tags = {
+      Name = "Nginx"
+  }     
 }
 
 ### jenkins (private instance)
