@@ -1,4 +1,4 @@
-remote_user = 'ec2-user'
+def remote_user = 'ec2-user'
 pipeline {
     agent any
 
